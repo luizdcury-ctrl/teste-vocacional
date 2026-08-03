@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Resultado - Teste Vocacional Inteligente</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="logo">🧭</div> Teste Vocacional Inteligente</div>
+      <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+    </div>
+  </div>
+
+  <div class="container" id="loadingScreen">
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <p>Gerando seu relatório personalizado…</p>
+    </div>
+  </div>
+
+  <div class="container" id="resultScreen" style="display:none;">
+
+    <div class="card profile-hero" id="profileHero"></div>
+
+    <div class="section-title"><span class="icon">📊</span><h2>Seu perfil em números</h2></div>
+    <p class="section-desc">Como suas respostas se distribuem entre competências e grandes áreas do conhecimento.</p>
+    <div class="charts-grid">
+      <div class="card chart-card">
+        <h2 style="font-size:16px;">Competências</h2>
+        <canvas id="radarChart" height="260"></canvas>
+      </div>
+      <div class="card chart-card">
+        <h2 style="font-size:16px;">Afinidade por área</h2>
+        <canvas id="barChart" height="260"></canvas>
+      </div>
+    </div>
+
+    <div class="section-title"><span class="icon">🎓</span><h2>Top 10 cursos superiores</h2></div>
+    <p class="section-desc">Cursos com maior compatibilidade com o seu perfil.</p>
+    <div class="card" id="cursosList"></div>
+
+    <div class="section-title"><span class="icon">💼</span><h2>Top profissões compatíveis</h2></div>
+    <p class="section-desc">Carreiras que combinam com seus interesses, competências e valores.</p>
+    <div class="card" id="profissoesList"></div>
+
+    <div class="section-title"><span class="icon">⭐</span><h2>Suas competências</h2></div>
+    <div class="card">
+      <p class="section-desc" style="margin-bottom:14px;">As competências que mais apareceram no seu perfil foram:</p>
+      <div class="two-col-list" id="competenciasFortes"></div>
+      <p class="section-desc" style="margin: 22px 0 14px;">Competências para desenvolver nos próximos meses:</p>
+      <div class="two-col-list" id="competenciasDesenvolver"></div>
+    </div>
+
+    <div class="section-title"><span class="icon">🏢</span><h2>Ambiente ideal de trabalho</h2></div>
+    <div class="card">
+      <div class="env-grid" id="ambienteGrid"></div>
+      <p class="section-desc" style="margin-top:18px;">Ambientes recomendados para o seu perfil:</p>
+      <div class="tag-row" id="ambientesTags"></div>
+    </div>
+
+    <div class="section-title"><span class="icon">🧩</span><h2>Sugestões práticas</h2></div>
+    <div class="card">
+      <div class="two-col-list" id="sugestoesPraticas"></div>
+    </div>
+
+    <div class="section-title"><span class="icon">🗓️</span><h2>Seu plano de desenvolvimento — próximos 12 meses</h2></div>
+    <div class="card">
+      <div class="action-plan" id="planoAcao"></div>
+    </div>
+
+    <div class="section-title"><span class="icon">💬</span><h2>Uma mensagem para você</h2></div>
+    <div class="card motivational-card">
+      <p id="mensagemMotivacional"></p>
+    </div>
+
+    <div class="card qr-box">
+      <h2 style="font-size:16px; margin-bottom:14px;">Compartilhe seu resultado</h2>
+      <div id="qrCanvas" style="display:inline-block;"></div>
+      <p class="section-desc" id="resultLink" style="margin-top:12px; word-break: break-all;"></p>
+    </div>
+
+    <div class="actions-row">
+      <button class="btn btn-primary" id="btnPdf">⬇️ Exportar PDF</button>
+      <button class="btn btn-secondary" id="btnEmail">✉️ Enviar por e-mail</button>
+      <button class="btn btn-secondary" id="btnCopyLink">🔗 Copiar link</button>
+      <a class="btn btn-secondary" href="index.html">↺ Refazer teste</a>
+    </div>
+
+    <p class="footer-note">Este resultado é uma orientação baseada em probabilidades e afinidades, não uma definição definitiva do seu futuro. Use-o como ponto de partida para explorar, conversar e decidir com mais confiança.</p>
+  </div>
+
+  <script src="js/result.js"></script>
+</body>
+</html>

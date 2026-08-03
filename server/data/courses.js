@@ -1,0 +1,42 @@
+// Banco de cursos superiores. `areas` e `competencias` são usados para calcular
+// a compatibilidade com o vetor de dimensões do aluno.
+
+const COURSES = [
+  { nome: "Ciência da Computação", areas: { tecnologia: 1, exatas: 0.6 }, competencias: { logica: 0.9, analise: 0.7 }, explicacao: "Forte afinidade com tecnologia e raciocínio lógico." },
+  { nome: "Engenharia da Computação", areas: { tecnologia: 0.9, engenharias: 0.8 }, competencias: { logica: 0.8, analise: 0.6 }, explicacao: "Combina lógica, tecnologia e resolução prática de problemas." },
+  { nome: "Engenharia Civil", areas: { engenharias: 1, exatas: 0.6 }, competencias: { organizacao: 0.6, analise: 0.7 }, explicacao: "Une exatas, organização e visão de projetos concretos." },
+  { nome: "Engenharia Mecânica", areas: { engenharias: 1, exatas: 0.6 }, competencias: { logica: 0.7, analise: 0.6 }, explicacao: "Ideal para quem gosta de exatas e criar soluções físicas." },
+  { nome: "Engenharia de Produção", areas: { engenharias: 0.8, negocios: 0.6 }, competencias: { organizacao: 0.8, analise: 0.6 }, explicacao: "Combina exatas com gestão e otimização de processos." },
+  { nome: "Medicina", areas: { saude: 1, biologicas: 0.8 }, competencias: { empatia: 0.6, persistencia: 0.7 }, explicacao: "Alta afinidade com saúde, ciências biológicas e cuidado com pessoas." },
+  { nome: "Enfermagem", areas: { saude: 1 }, competencias: { empatia: 0.8, organizacao: 0.5 }, explicacao: "Perfil de cuidado, empatia e atuação direta em saúde." },
+  { nome: "Psicologia", areas: { humanas: 0.7, saude: 0.5 }, competencias: { empatia: 0.9, comunicacao: 0.5 }, explicacao: "Forte ligação com empatia, relações humanas e escuta." },
+  { nome: "Fisioterapia", areas: { saude: 1, biologicas: 0.5 }, competencias: { empatia: 0.6, persistencia: 0.5 }, explicacao: "Combina cuidado com pessoas e conhecimento do corpo humano." },
+  { nome: "Nutrição", areas: { saude: 0.9, biologicas: 0.6 }, competencias: { organizacao: 0.5, empatia: 0.5 }, explicacao: "Une saúde, ciências biológicas e cuidado com hábitos." },
+  { nome: "Biomedicina", areas: { biologicas: 1, saude: 0.6 }, competencias: { analise: 0.7 }, explicacao: "Forte perfil investigativo em ciências biológicas." },
+  { nome: "Direito", areas: { direito: 1, humanas: 0.5 }, competencias: { comunicacao: 0.7, analise: 0.6 }, explicacao: "Combina argumentação, análise e senso de justiça." },
+  { nome: "Administração", areas: { negocios: 1 }, competencias: { organizacao: 0.6, lideranca: 0.5 }, explicacao: "Perfil de gestão, negócios e visão estratégica." },
+  { nome: "Ciências Contábeis", areas: { negocios: 0.8, exatas: 0.5 }, competencias: { organizacao: 0.8, analise: 0.6 }, explicacao: "Une exatas e organização aplicadas a negócios." },
+  { nome: "Economia", areas: { negocios: 0.8, exatas: 0.6 }, competencias: { analise: 0.8, logica: 0.5 }, explicacao: "Forte perfil analítico voltado a negócios e sociedade." },
+  { nome: "Relações Internacionais", areas: { humanas: 0.7, negocios: 0.4 }, competencias: { comunicacao: 0.6, analise: 0.5 }, explicacao: "Combina humanas, negócios e visão global." },
+  { nome: "Marketing", areas: { negocios: 0.7, comunicacao_area: 0.6 }, competencias: { criatividade: 0.6, comunicacao: 0.6 }, explicacao: "Une criatividade, comunicação e visão de negócios." },
+  { nome: "Publicidade e Propaganda", areas: { comunicacao_area: 1, artes: 0.4 }, competencias: { criatividade: 0.8, comunicacao: 0.6 }, explicacao: "Perfil criativo e comunicativo, voltado a marcas e conteúdo." },
+  { nome: "Jornalismo", areas: { comunicacao_area: 1, humanas: 0.4 }, competencias: { comunicacao: 0.8, analise: 0.4 }, explicacao: "Forte afinidade com comunicação, investigação e escrita." },
+  { nome: "Design Gráfico", areas: { artes: 0.8, comunicacao_area: 0.5 }, competencias: { criatividade: 0.9 }, explicacao: "Alta criatividade aplicada à comunicação visual." },
+  { nome: "Design de Produto", areas: { artes: 0.6, tecnologia: 0.4, engenharias: 0.4 }, competencias: { criatividade: 0.8, analise: 0.4 }, explicacao: "Combina criatividade com solução prática de problemas." },
+  { nome: "Arquitetura e Urbanismo", areas: { artes: 0.5, engenharias: 0.6 }, competencias: { criatividade: 0.7, organizacao: 0.5 }, explicacao: "Une criatividade, exatas e visão espacial." },
+  { nome: "Belas Artes", areas: { artes: 1 }, competencias: { criatividade: 0.9 }, explicacao: "Forte perfil artístico e expressivo." },
+  { nome: "Música", areas: { artes: 1 }, competencias: { criatividade: 0.8, persistencia: 0.5 }, explicacao: "Perfil artístico com disciplina de prática constante." },
+  { nome: "Pedagogia", areas: { educacao: 1, humanas: 0.4 }, competencias: { empatia: 0.6, comunicacao: 0.5 }, explicacao: "Forte vocação para ensinar e formar pessoas." },
+  { nome: "Letras", areas: { educacao: 0.6, humanas: 0.6, comunicacao_area: 0.4 }, competencias: { comunicacao: 0.7, criatividade: 0.4 }, explicacao: "Combina linguagem, comunicação e ensino." },
+  { nome: "História", areas: { humanas: 1, educacao: 0.4 }, competencias: { analise: 0.5, comunicacao: 0.4 }, explicacao: "Alta afinidade com humanas e investigação do passado." },
+  { nome: "Geografia", areas: { humanas: 0.7, biologicas: 0.3 }, competencias: { analise: 0.5 }, explicacao: "Une humanas com compreensão do território e ambiente." },
+  { nome: "Ciências Sociais", areas: { humanas: 1 }, competencias: { analise: 0.6, comunicacao: 0.5 }, explicacao: "Forte vocação para entender dinâmicas sociais." },
+  { nome: "Educação Física", areas: { saude: 0.6, educacao: 0.5 }, competencias: { empatia: 0.4, organizacao: 0.4 }, explicacao: "Combina saúde, ensino e movimento." },
+  { nome: "Engenharia Ambiental", areas: { engenharias: 0.6, biologicas: 0.6 }, competencias: { analise: 0.6, impacto_social: 0.5 }, explicacao: "Une exatas, biológicas e impacto socioambiental." },
+  { nome: "Veterinária", areas: { biologicas: 0.9, saude: 0.5 }, competencias: { empatia: 0.6, persistencia: 0.5 }, explicacao: "Forte afinidade com biológicas e cuidado com animais." },
+  { nome: "Gastronomia", areas: { artes: 0.4, negocios: 0.3 }, competencias: { criatividade: 0.6, organizacao: 0.4 }, explicacao: "Combina criatividade prática com gestão de negócio próprio." },
+  { nome: "Sistemas de Informação", areas: { tecnologia: 0.9, negocios: 0.4 }, competencias: { logica: 0.7, organizacao: 0.5 }, explicacao: "Une tecnologia com aplicação em negócios." },
+  { nome: "Análise e Desenvolvimento de Sistemas", areas: { tecnologia: 1 }, competencias: { logica: 0.8 }, explicacao: "Curso técnico focado e direto para tecnologia." },
+];
+
+module.exports = { COURSES };

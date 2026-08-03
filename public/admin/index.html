@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - Teste Vocacional</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="logo">🧭</div> Painel Administrativo</div>
+      <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+    </div>
+  </div>
+
+  <div class="container" style="max-width:1000px;">
+    <div class="card" id="loginCard" style="max-width:420px; margin: 40px auto;">
+      <h2>Acesso restrito</h2>
+      <p class="subtitle">Digite a senha administrativa fornecida pela coordenação do colégio.</p>
+      <div class="field">
+        <label for="password">Senha</label>
+        <input type="password" id="password" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary btn-block" id="loginBtn">Entrar</button>
+      <p class="helper-text" id="loginError" style="color:#e03131;"></p>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+      <div class="hero" style="text-align:left; padding: 20px 0;">
+        <h1 style="font-size:26px;">Estatísticas agregadas</h1>
+        <p style="margin:0;">Nenhum dado individual de aluno é exibido aqui — apenas agregados por turma e por perfil.</p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 18px;">
+        <div class="field">
+          <label for="filtroSerie">Filtrar por série/turma</label>
+          <select id="filtroSerie"><option value="">Todas</option></select>
+        </div>
+        <div class="field" style="display:flex; align-items:flex-end;">
+          <button class="btn btn-secondary" id="refreshBtn">↻ Atualizar dados</button>
+        </div>
+      </div>
+
+      <div class="charts-grid" style="grid-template-columns: repeat(3,1fr);">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:34px; font-weight:800;" id="totalRespostas">0</div>
+          <div class="section-desc" style="margin:0;">testes respondidos</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:34px; font-weight:800;" id="totalPerfis">0</div>
+          <div class="section-desc" style="margin:0;">perfis diferentes identificados</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:34px; font-weight:800;" id="pctFaculdade">0%</div>
+          <div class="section-desc" style="margin:0;">pretendem cursar faculdade</div>
+        </div>
+      </div>
+
+      <div class="section-title"><span class="icon">🧭</span><h2>Distribuição de perfis vocacionais</h2></div>
+      <div class="card"><canvas id="perfilChart" height="120"></canvas></div>
+
+      <div class="charts-grid">
+        <div class="card">
+          <h2 style="font-size:16px;">Áreas de maior interesse (média da turma)</h2>
+          <canvas id="areasChart" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h2 style="font-size:16px;">Competências predominantes (média da turma)</h2>
+          <canvas id="competenciasChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="section-title"><span class="icon">🎓</span><h2>Cursos mais indicados</h2></div>
+      <div class="card" id="cursosIndicados"></div>
+
+      <div class="section-title"><span class="icon">🏫</span><h2>Distribuição por série</h2></div>
+      <div class="card"><canvas id="serieChart" height="120"></canvas></div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
