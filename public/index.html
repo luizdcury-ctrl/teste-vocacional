@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teste Vocacional Inteligente</title>
+  <title>Colégio Visão · Teste Vocacional Inteligente</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="brand"><div class="logo">🧭</div> Teste Vocacional Inteligente</div>
-      <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+      <div class="brand"><div class="logo"><img src="img/logo-visao.svg" alt="Colégio Visão"></div><div class="brand-text"><span class="school">Colégio Visão</span><span class="subtitle-small">Teste Vocacional Inteligente</span></div></div>
+      <div class="topbar-actions">
+        <a class="nav-tab active" href="index.html">📝 Teste</a>
+        <a class="nav-tab" href="privacidade.html">🔒 Privacidade (LGPD)</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+      </div>
     </div>
     <div class="progress-wrap" style="max-width:880px; margin:0 auto;">
       <div class="progress-bar" id="progressBar"></div>
@@ -56,19 +60,15 @@
         </div>
         <div class="grid-2">
           <div class="field">
-            <label for="escola">Escola</label>
-            <input type="text" id="escola" name="escola" required>
-          </div>
-          <div class="field">
             <label for="email">E-mail</label>
             <input type="email" id="email" name="email" required autocomplete="email">
           </div>
-        </div>
-        <div class="grid-2">
           <div class="field">
             <label for="telefone">Telefone</label>
             <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
           </div>
+        </div>
+        <div class="grid-2">
           <div class="field">
             <label>Pretende fazer faculdade?</label>
             <div class="radio-group" id="pretendeFaculdadeGroup">
@@ -78,6 +78,10 @@
             </div>
           </div>
         </div>
+        <label class="consent-box">
+          <input type="checkbox" id="consentimento" required>
+          <span>Li e concordo com a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade (LGPD)</a> do Colégio Visão. Se tenho menos de 18 anos, meu responsável está ciente da minha participação.</span>
+        </label>
       </section>
 
       <!-- PERGUNTAS -->

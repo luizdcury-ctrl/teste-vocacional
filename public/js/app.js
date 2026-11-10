@@ -117,6 +117,10 @@
       }
     });
 
+    form.addEventListener("change", (e) => {
+      if (e.target.id === "consentimento") updateProgress();
+    });
+
     form.addEventListener("input", (e) => {
       if (e.target.matches("input[type=text], input[type=email], input[type=tel], input[type=number], select")) {
         saveProgress();
@@ -133,7 +137,7 @@
       idade: document.getElementById("idade").value.trim(),
       serie: document.getElementById("serie").value,
       cidade: document.getElementById("cidade").value.trim(),
-      escola: document.getElementById("escola").value.trim(),
+      escola: "Colégio Visão",
       email: document.getElementById("email").value.trim(),
       telefone: document.getElementById("telefone").value.trim(),
       pretendeFaculdade: form.querySelector('input[name="pretendeFaculdade"]:checked')?.value || "",
@@ -164,11 +168,12 @@
     progressBar.style.width = pct + "%";
     progressLabel.textContent = `${pct}% concluído · ${answered} de ${PERGUNTAS.length} perguntas respondidas`;
 
-    const requiredDados = ["nome", "idade", "serie", "cidade", "escola", "email", "pretendeFaculdade"];
+    const requiredDados = ["nome", "idade", "serie", "cidade", "email", "pretendeFaculdade"];
     const dadosOk = requiredDados.every((k) => dados[k] && dados[k].length > 0);
     const allAnswered = answered === PERGUNTAS.length;
 
-    submitBtn.disabled = !(dadosOk && allAnswered);
+    const consentOk = document.getElementById("consentimento")?.checked;
+    submitBtn.disabled = !(dadosOk && allAnswered && consentOk);
     submitBtn.textContent = dadosOk && allAnswered
       ? "Enviar e ver meu resultado"
       : `Enviar e ver meu resultado (${answered}/${PERGUNTAS.length})`;
@@ -216,7 +221,7 @@
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dadosIniciais, answers }),
+        body: JSON.stringify({ dadosIniciais, answers, consentimento: true }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.erro || "Erro ao enviar.");

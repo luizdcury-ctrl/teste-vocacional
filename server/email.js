@@ -22,7 +22,7 @@ async function sendResultEmail({ to, nome, resultUrl, perfilNome }) {
 
   const html = `
     <div style="font-family: Arial, Helvetica, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a;">
-      <h2 style="color:#4C6EF5;">Seu Teste Vocacional está pronto! 🎓</h2>
+      <h2 style="color:#FF0000;">Colégio Visão · Seu Teste Vocacional está pronto! 🎓</h2>
       <p>Olá, <strong>${nome}</strong>!</p>
       <p>Seu perfil vocacional predominante é <strong>${perfilNome}</strong>. Acesse o link abaixo para ver seu relatório completo, com gráficos, cursos e profissões compatíveis:</p>
       <p style="text-align:center; margin: 24px 0;">
@@ -30,7 +30,7 @@ async function sendResultEmail({ to, nome, resultUrl, perfilNome }) {
       </p>
       <p style="font-size: 13px; color: #666;">Se o botão não funcionar, copie e cole este link no navegador:<br>${resultUrl}</p>
       <hr style="border:none; border-top:1px solid #eee; margin: 24px 0;">
-      <p style="font-size: 12px; color: #999;">Este e-mail foi enviado automaticamente pelo Teste Vocacional Inteligente do colégio.</p>
+      <p style="font-size: 12px; color: #999;">Este e-mail foi enviado automaticamente pelo Teste Vocacional Inteligente do Colégio Visão.</p>
     </div>
   `;
 

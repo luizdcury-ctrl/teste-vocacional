@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colégio Visão · Privacidade e LGPD</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="logo"><img src="img/logo-visao.svg" alt="Colégio Visão"></div><div class="brand-text"><span class="school">Colégio Visão</span><span class="subtitle-small">Teste Vocacional Inteligente</span></div></div>
+      <div class="topbar-actions">
+        <a class="nav-tab" href="index.html">📝 Teste</a>
+        <a class="nav-tab active" href="privacidade.html">🔒 Privacidade (LGPD)</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card legal-hero">
+      <img class="legal-logo" src="img/logo-visao.svg" alt="Colégio Visão">
+      <h1>Privacidade e proteção dos seus dados</h1>
+      <p>No Colégio Visão, cuidar de você inclui cuidar das suas informações. Aqui explicamos, de forma simples, o que fazemos com os dados do Teste Vocacional, conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 – LGPD).</p>
+    </div>
+
+    <div class="card legal">
+      <h2>1. Quem é o responsável pelos dados</h2>
+      <p>O <strong>Colégio Visão</strong> é o controlador dos dados coletados neste teste. Dúvidas e solicitações sobre seus dados podem ser feitas à secretaria ou à coordenação do Colégio.</p>
+
+      <h2>2. Quais dados coletamos</h2>
+      <ul>
+        <li><strong>Dados de identificação:</strong> nome, idade, série, cidade, e-mail e telefone (opcional).</li>
+        <li><strong>Respostas do questionário:</strong> suas respostas às perguntas sobre interesses, personalidade, competências, ambiente de trabalho, valores e projetos de vida.</li>
+        <li><strong>Resultado gerado:</strong> perfil, áreas, cursos e profissões sugeridos.</li>
+        <li><strong>Intenção de cursar faculdade:</strong> sim, não ou ainda não sei.</li>
+      </ul>
+      <p>Não coletamos documentos (CPF, RG), dados de saúde, religião, orientação sexual ou qualquer outro dado sensível.</p>
+
+      <h2>3. Para que usamos</h2>
+      <ul>
+        <li>Gerar o seu relatório de orientação vocacional personalizado.</li>
+        <li>Enviar o relatório para o seu e-mail, quando você solicitar.</li>
+        <li>Gerar <strong>estatísticas agregadas</strong> para a escola (por exemplo: perfis mais comuns por série), sem identificar alunos individualmente.</li>
+        <li>Apoiar ações de orientação e acolhimento dos estudantes pela equipe pedagógica.</li>
+      </ul>
+      <p>Não usamos seus dados para publicidade de terceiros e não vendemos suas informações.</p>
+
+      <h2>4. Base legal</h2>
+      <p>O tratamento é feito com base no seu <strong>consentimento</strong> (art. 7º, I, da LGPD). Para estudantes menores de 18 anos, o tratamento observa o <strong>melhor interesse do adolescente</strong> (art. 14), e solicitamos a ciência do responsável legal.</p>
+
+      <h2>5. Quem tem acesso</h2>
+      <ul>
+        <li><strong>Você</strong>, por meio do link exclusivo do seu resultado. Quem tiver esse link consegue ver o relatório, então não o compartilhe com quem você não quiser.</li>
+        <li><strong>Equipe autorizada do Colégio</strong>, por meio de um painel protegido por senha que exibe apenas dados agregados.</li>
+        <li><strong>Prestadores de serviço de tecnologia</strong> (hospedagem do sistema e envio de e-mail), que tratam os dados apenas para operar o serviço.</li>
+      </ul>
+
+      <h2>6. Segurança</h2>
+      <p>Adotamos medidas técnicas e organizacionais para proteger as informações: conexão criptografada (HTTPS), links de resultado com identificadores aleatórios e difíceis de adivinhar, acesso administrativo protegido por senha e exibição somente de estatísticas agregadas no painel da escola.</p>
+
+      <h2>7. Por quanto tempo guardamos</h2>
+      <p>Mantemos seus dados apenas pelo tempo necessário para cumprir as finalidades acima. Quando deixarem de ser necessários, ou se você solicitar, eles serão eliminados ou anonimizados.</p>
+
+      <h2>8. Seus direitos</h2>
+      <p>Você pode, a qualquer momento, solicitar ao Colégio:</p>
+      <ul>
+        <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+        <li>correção de dados incompletos ou incorretos;</li>
+        <li>anonimização, bloqueio ou eliminação de dados desnecessários;</li>
+        <li>portabilidade dos dados;</li>
+        <li>informação sobre com quem os dados são compartilhados;</li>
+        <li><strong>revogação do consentimento</strong> e eliminação dos dados tratados com base nele.</li>
+      </ul>
+      <p>Para exercer qualquer direito, procure a secretaria ou a coordenação do Colégio Visão informando o seu nome e o e-mail usado no teste.</p>
+
+      <h2>9. Responsáveis legais</h2>
+      <p>Se você tem menos de 18 anos, converse com seu responsável antes de participar. Ele também pode solicitar informações, correção ou exclusão dos seus dados.</p>
+
+      <h2>10. Atualizações desta política</h2>
+      <p>Podemos atualizar este texto para refletir melhorias no sistema ou mudanças na lei. A versão vigente sempre estará disponível nesta página.</p>
+
+      <p class="legal-updated">Última atualização: novembro de 2026.</p>
+    </div>
+
+    <div class="actions-row">
+      <a class="btn btn-primary" href="index.html">Voltar ao teste</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("themeToggle");
+      var saved = localStorage.getItem("voc_theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      function cur() { return document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); }
+      function icon() { btn.textContent = cur() === "dark" ? "☀️" : "🌙"; }
+      icon();
+      btn.addEventListener("click", function () {
+        var next = cur() === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("voc_theme", next);
+        icon();
+      });
+    })();
+  </script>
+</body>
+</html>

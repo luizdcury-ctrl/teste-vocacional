@@ -24,10 +24,13 @@ router.get("/questions", (req, res) => {
 });
 
 router.post("/submit", (req, res) => {
-  const { dadosIniciais, answers } = req.body || {};
+  const { dadosIniciais, answers, consentimento } = req.body || {};
 
   if (!dadosIniciais || !answers) {
     return res.status(400).json({ erro: "Dados incompletos." });
+  }
+  if (consentimento !== true) {
+    return res.status(400).json({ erro: "É necessário aceitar a Política de Privacidade (LGPD) para continuar." });
   }
   if (!dadosIniciais.nome || !dadosIniciais.email) {
     return res.status(400).json({ erro: "Nome e e-mail são obrigatórios." });
@@ -68,6 +71,8 @@ router.post("/submit", (req, res) => {
     area_top: result.areas[0]?.label || "",
     curso_top: result.cursos[0]?.curso || "",
     email_enviado: 0,
+    consentimento_lgpd: true,
+    consentimento_em: createdAt,
   });
 
   res.json({ id, dadosIniciais, result });
