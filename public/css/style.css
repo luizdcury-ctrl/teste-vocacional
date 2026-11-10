@@ -576,3 +576,11 @@ a { color: var(--primary); }
 .brand .logo { height: 56px; }
 .brand-text .subtitle-small { font-size: 12px; }
 @media (max-width: 560px) { .brand .logo { height: 44px; } }
+
+/* Recorta a margem em branco da imagem (sem alterá-la) para a logo ocupar mais espaço */
+.brand .logo { height: 48px; padding: 0; overflow: hidden; position: relative; }
+.brand .logo img { height: 84px; width: auto; max-width: none; margin: -18px -14px; }
+@media (max-width: 560px) {
+  .brand .logo { height: 40px; }
+  .brand .logo img { height: 70px; margin: -15px -12px; }
+}
