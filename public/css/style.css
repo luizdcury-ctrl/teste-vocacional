@@ -571,3 +571,8 @@ a { color: var(--primary); }
 .answers .ans { font-weight: 700; white-space: nowrap; }
 .answers .v1, .answers .v2 { color: #e03131; }
 .answers .v4, .answers .v5 { color: var(--success); }
+
+/* Logo com "COLÉGIO": um pouco maior para a palavra ficar legível */
+.brand .logo { height: 56px; }
+.brand-text .subtitle-small { font-size: 12px; }
+@media (max-width: 560px) { .brand .logo { height: 44px; } }
