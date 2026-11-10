@@ -1,5 +1,9 @@
 const express = require("express");
 const db = require("../db");
+const { QUESTIONS } = require("../data/questions");
+
+const LIKERT = ["Discordo totalmente", "Discordo", "Neutro", "Concordo", "Concordo totalmente"];
+const BLOCOS = { 1: "Interesses", 2: "Personalidade", 3: "Competências", 4: "Ambiente de Trabalho", 5: "Valores", 6: "Projetos de Vida" };
 
 const router = express.Router();
 
@@ -78,6 +82,60 @@ router.get("/stats", requireAdmin, (req, res) => {
     pretendeFaculdade,
     series: [...new Set(rows.map((r) => r.serie).filter(Boolean))].sort(),
   });
+});
+
+function resumo(r) {
+  return {
+    id: r.id, data: r.created_at, nome: r.nome, idade: r.idade, serie: r.serie, cidade: r.cidade,
+    email: r.email, telefone: r.telefone, pretendeFaculdade: r.pretende_faculdade,
+    perfil: r.perfil_predominante, perfilIcone: r.perfil_icone, areaTop: r.area_top, cursoTop: r.curso_top,
+  };
+}
+
+router.get("/respostas", requireAdmin, (req, res) => {
+  const serie = req.query.serie;
+  const q = (req.query.q || "").toString().toLowerCase().trim();
+  let rows = db.getAllResults();
+  if (serie) rows = rows.filter((r) => r.serie === serie);
+  if (q) rows = rows.filter((r) => [r.nome, r.email, r.perfil_predominante, r.cidade].join(" ").toLowerCase().includes(q));
+  rows.sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
+  res.json({ total: rows.length, respostas: rows.map(resumo) });
+});
+
+router.get("/respostas/:id", requireAdmin, (req, res) => {
+  const r = db.getResultById(req.params.id);
+  if (!r) return res.status(404).json({ erro: "Resposta não encontrada." });
+  let answers = {};
+  let result = {};
+  try { answers = JSON.parse(r.answers_json); result = JSON.parse(r.result_json); } catch {}
+  const respostas = QUESTIONS.map((qu) => ({
+    id: qu.id, bloco: BLOCOS[qu.block], pergunta: qu.text,
+    valor: answers[qu.id] || null, resposta: answers[qu.id] ? LIKERT[answers[qu.id] - 1] : "Sem resposta",
+  }));
+  res.json({
+    ...resumo(r),
+    consentimentoLgpd: !!r.consentimento_lgpd,
+    respostas,
+    resultado: {
+      perfil: result.perfilPredominante && { nome: result.perfilPredominante.nome, aderencia: result.perfilPredominante.aderencia },
+      competencias: result.competencias, areas: result.areas,
+      cursos: (result.cursos || []).slice(0, 5), profissoes: (result.profissoes || []).slice(0, 5),
+    },
+  });
+});
+
+router.get("/respostas.csv", requireAdmin, (req, res) => {
+  const esc = (v) => { let s = String(v ?? ""); if (/^[=+\-@]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
+  const rows = db.getAllResults();
+  const head = ["Data", "Nome", "Idade", "Série", "Cidade", "E-mail", "Telefone", "Pretende faculdade", "Perfil", "Área top", "Curso top", ...QUESTIONS.map((x) => x.id.toUpperCase() + " - " + x.text)];
+  const lines = [head.map(esc).join(";")];
+  for (const r of rows) {
+    let a = {}; try { a = JSON.parse(r.answers_json); } catch {}
+    lines.push([r.created_at, r.nome, r.idade, r.serie, r.cidade, r.email, r.telefone, r.pretende_faculdade, r.perfil_predominante, r.area_top, r.curso_top, ...QUESTIONS.map((x) => a[x.id] ?? "")].map(esc).join(";"));
+  }
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", 'attachment; filename="respostas-teste-vocacional.csv"');
+  res.send("﻿" + lines.join("\r\n"));
 });
 
 module.exports = { router, requireAdmin };

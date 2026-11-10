@@ -30,7 +30,7 @@
     <div id="dashboard" style="display:none;">
       <div class="hero" style="text-align:left; padding: 20px 0;">
         <h1 style="font-size:26px;">Estatísticas agregadas</h1>
-        <p style="margin:0;">Nenhum dado individual de aluno é exibido aqui — apenas agregados por turma e por perfil.</p>
+        <p style="margin:0;">Visão geral da turma e, mais abaixo, as respostas individuais de cada aluno.</p>
       </div>
 
       <div class="grid-2" style="margin-bottom: 18px;">
@@ -77,9 +77,29 @@
 
       <div class="section-title"><span class="icon">🏫</span><h2>Distribuição por série</h2></div>
       <div class="card"><canvas id="serieChart" height="120"></canvas></div>
+
+      <div class="section-title"><span class="icon">🧑‍🎓</span><h2>Respostas individuais</h2></div>
+      <div class="card">
+        <div class="grid-2" style="margin-bottom:12px;">
+          <div class="field" style="margin:0;"><input type="search" id="busca" placeholder="Buscar por nome, e-mail, cidade ou perfil…"></div>
+          <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+            <button class="btn btn-secondary" id="csvBtn">⬇️ Exportar CSV</button>
+          </div>
+        </div>
+        <p class="section-desc" id="respostasCount" style="margin:0 0 10px;"></p>
+        <div class="table-wrap"><table class="resp-table"><thead><tr><th>Data</th><th>Aluno</th><th>Série</th><th>Perfil</th><th>Curso top</th></tr></thead><tbody id="respostasBody"></tbody></table></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal" style="display:none;">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+      <div id="modalContent"></div>
     </div>
   </div>
 
   <script src="js/admin.js"></script>
+  <script src="js/respostas.js"></script>
 </body>
 </html>

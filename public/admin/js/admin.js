@@ -62,6 +62,7 @@
     }
     const stats = await res.json();
     render(stats);
+    window.dispatchEvent(new Event("stats-loaded"));
     return true;
   }
 
