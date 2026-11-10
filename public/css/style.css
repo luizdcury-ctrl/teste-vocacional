@@ -584,3 +584,11 @@ a { color: var(--primary); }
   .brand .logo { height: 40px; }
   .brand .logo img { height: 70px; margin: -15px -12px; }
 }
+
+/* Ajuste final: logo inteira dentro da caixa branca (sem cortes) */
+.brand .logo { height: 40px; width: 124px; padding: 0; overflow: hidden; display: block; }
+.brand .logo img { height: 60px; width: auto; max-width: none; margin: -5px 0 0 -3px; display: block; }
+@media (max-width: 560px) {
+  .brand .logo { height: 34px; width: 100px; }
+  .brand .logo img { height: 48px; margin: -4px 0 0 -2px; }
+}
