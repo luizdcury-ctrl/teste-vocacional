@@ -551,3 +551,4 @@ a { color: var(--primary); }
   .brand .logo { height: 36px; }
   .brand-text .subtitle-small { display: none; }
 }
+.legal-logo { max-width: 100%; height: auto; max-height: 120px; object-fit: contain; box-sizing: border-box; }
